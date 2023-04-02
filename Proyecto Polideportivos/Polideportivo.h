@@ -14,7 +14,7 @@ typedef struct {
 	Instalacion* instalaciones;
 	int NumInsta;
 	char* dir;
-	char* Provincia;
+	char* provincia;
 }Polideportivo;
 
 verInstalaciones();
