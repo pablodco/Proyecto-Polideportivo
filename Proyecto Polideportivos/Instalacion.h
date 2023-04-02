@@ -8,6 +8,16 @@
 #ifndef INSTALACION_H_
 #define INSTALACION_H_
 #include <stdbool.h>
+
+typedef struct{
+	boolean ocupada;
+	int hora;
+}Hora;
+
+typedef struct{
+	Hora* horas;
+}Horario;
+
 typedef struct{
 	char* nombre;
 	int id;
@@ -15,14 +25,6 @@ typedef struct{
 	char* deporte;
 }Instalacion;
 
-typedef struct{
-	Hora* horas;
-}Horario;
-
-typedef struct{
-	boolean ocupada;
-	int hora;
-}Hora;
 
 comprobarHora();
 verHorario();
