@@ -39,8 +39,15 @@ cargarBD(){
 	if (result==SQLITE_OK){
 
 	}sqlite3_step(stmt);
+}
 
-
-
+cargarPolideportivo(char* p,sqlite3* bd){
+	sqlite3_stmt* stmt;
+	char* sql="Select * from Polideportivo where nombre='?'";
+	int result = sqlite3_prepare_v2(bd, sql, strlen(sql) + 1, stmt, NULL) ;
+	sqlite3_bind_text(stmt, 1, p);
+	sqlite3_step(stmt);
 
 }
+
+

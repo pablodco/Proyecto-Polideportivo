@@ -10,12 +10,12 @@
 #include "sqlite3.h"
 cargarBD(sqlite3* bd,);
 guardarBD();
-comprobarContraseña();
-anadirInstalacion();
-modificarInstalacion();
-comprobarInstalacion();
-cargarPolideportivo();
-anadirPolideportivo();
+comprobarContraseña(Administrador a,sqlite3* bd);
+anadirInstalacion(Instalacion in,sqlite3* bd);
+modificarInstalacion(Instalacion in,sqlite3* bd);
+comprobarInstalacion(Instalacion in,sqlite3* bd);
+cargarPolideportivo(Polideportivo p,sqlite3* bd);
+anadirPolideportivo(Polideportivo p,sqlite3* bd);
 
 
 
