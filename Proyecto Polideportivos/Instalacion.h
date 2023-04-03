@@ -10,7 +10,7 @@
 #include <stdbool.h>
 
 typedef struct{
-	boolean ocupada;
+	BOOLEAN ocupada;
 	int hora;
 }Hora;
 
@@ -23,12 +23,13 @@ typedef struct{
 	int id;
 	Horario horario;
 	char* deporte;
+	int id_poli;
 }Instalacion;
 
 
-comprobarHora();
-verHorario();
-imprimirInstalacion();
+int comprobarHora();
+void verHorario();
+void imprimirInstalacion();
 
 
 #endif /* INSTALACION_H_ */

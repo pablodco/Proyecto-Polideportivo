@@ -47,7 +47,7 @@ int cargarBD(){
 
 Polideportivo* cargarPolideportivo(char* nombre,sqlite3* bd){
 	sqlite3_stmt* stmt;
-	Polideportivo* p= (Polideportivo*)malloc(sizeof(Instalacion));
+	Polideportivo* p= (Polideportivo*)malloc(sizeof(Polideportivo));
 	char* sql="Select * from Polideportivo where nombre='?'";
 	int result = sqlite3_prepare(bd, sql, strlen(sql) + 1, &stmt, NULL) ;
 	sqlite3_bind_text(stmt, 1, nombre,strlen(nombre)+1,NULL);
@@ -227,4 +227,3 @@ Instalacion* cargarInstalacion(int id,sqlite3* bd){
 		result= sqlite3_finalize(stmt);
 		return i;
 	}
-
