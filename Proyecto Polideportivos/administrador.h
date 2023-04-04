@@ -22,8 +22,8 @@ typedef struct{
 
 void filtroAdmin();
 
-void filtoInstalaciones();
+void filtoInstalaciones(Instalacion insta);
 
-void filtroPolideportivos();
+void filtroPolideportivos(Polideportivo poli);
 
 #endif /* ADMINISTRADOR_H_ */
