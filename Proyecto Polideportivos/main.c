@@ -10,6 +10,7 @@ int main(void) {
 	printf("1 = Si // 2 = No \n");
 	scanf("%d",&numero);
 	primeraVentana(numero);
+	printf("HOLA ");
 
 
 }
