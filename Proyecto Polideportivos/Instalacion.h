@@ -10,7 +10,7 @@
 #include <stdbool.h>
 
 typedef struct{
-	BOOLEAN ocupada;
+	bool ocupada;
 	int hora;
 }Hora;
 

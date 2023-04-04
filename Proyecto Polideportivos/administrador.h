@@ -7,7 +7,8 @@
 
 #ifndef ADMINISTRADOR_H_
 #define ADMINISTRADOR_H_
-
+#include "polideportivo.h"
+#include  "baseDeDatos.h"
 typedef struct{
 	char* nombre;
 	char* apellido;
@@ -22,12 +23,12 @@ typedef struct{
 
 void filtroAdmin();
 
-void filtoInstalaciones(Instalacion *insta);
+void filtoInstalaciones(sqlite3* bd,Polideportivo* poli);
 
-void filtroPolideportivos(Polideportivo poli);
+void filtroPolideportivos(sqlite3* bd);
 
-void borrarInstalacion(Instalacion *insta);
+void menuBorrarInstalacion(Instalacion *insta,sqlite3* bd);
 
-void borrarPolideportivo(Polideportivo poli);
+void menuBorrarPolideportivo(Polideportivo poli,sqlite3* bd);
 
 #endif /* ADMINISTRADOR_H_ */

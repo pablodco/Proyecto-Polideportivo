@@ -7,34 +7,29 @@
 
 #include "Polideportivo.h"
 
-void agregarPolideportivo(){
-	Polideportivo miPolideportivo;
+Polideportivo* agregarPolideportivo(){
+	Polideportivo* miPolideportivo;
 
 	printf("Introduzca el nombre del polideportivo: ");
-	scanf("%s", miPolideportivo.nombre);
+	scanf("%s", *miPolideportivo->nombre);
 
 	printf("Introduzca el id del polideportivo: ");
-	scanf("%d", &miPolideportivo.id);
+	scanf("%d", miPolideportivo->id);
 
 	printf("Introduzca la dirección del polideportivo: ");
-	scanf("%s", miPolideportivo.dir);
+	scanf("%s", *miPolideportivo->dir);
 
 	printf("Introduzca la provincia del polideportivo: ");
-	scanf("%s", miPolideportivo.provincia);
+	scanf("%s", *miPolideportivo->provincia);
 
 	printf("Introduzca el número de instalaciones del polideportivo: ");
-	scanf("%d", &miPolideportivo.NumInsta);
-
-
-	miPolideportivo.instalaciones = (Instalacion*)malloc(miPolideportivo.NumInsta * sizeof(Instalacion));
-
-	for (int i = 0; i < miPolideportivo.NumInsta; i++) {
+	scanf("%d", miPolideportivo->NumInsta);
+	miPolideportivo->instalaciones = (Instalacion*)malloc(miPolideportivo->NumInsta * sizeof(Instalacion));
+	miPolideportivo= (Polideportivo*)malloc(sizeof (Polideportivo));
+	for (int i = 0; i < miPolideportivo->NumInsta; i++) {
 	    printf("Introduzca el nombre de la instalación %d: ", i+1);
-	    scanf("%s", miPolideportivo.instalaciones[i].nombre);
-
+	    scanf("%s", *miPolideportivo->instalaciones[i].nombre);
 	    printf("Introduzca el deporte de la instalación %d: ", i+1);
-	    scanf("%d", &miPolideportivo.instalaciones[i].deporte);
-	}
-	free(miPolideportivo.instalaciones);
-
+	    scanf("%d", miPolideportivo->instalaciones[i].deporte);
+	}return miPolideportivo;
 }

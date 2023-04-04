@@ -9,48 +9,26 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-int cargarBD(){
+sqlite3* cargarBD(){
 	sqlite3* bd;
 	sqlite3_stmt* stmt;
 	int result=sqlite3_open("PolisBD", &bd);
 	if (result== SQLITE_OK){
 		printf("error al abrir la base de datos");
-	}
-	char* sql="create table Admin if not exists(int id Primary KEY;string nombre,string apellido,string email,string contraseña,int id_p)";
-	result= sqlite3_prepare(bd, sql, strlen(sql)+1, &stmt, NULL);
-	if (result==SQLITE_OK){
-
-	}sqlite3_step(stmt);
-	sql="create table Usuario if not exists(int id Primary KEY;string nombre,string apellido,string email,string contraseña,string dir,string ciudad)";
-	result= sqlite3_prepare(bd, sql, strlen(sql)+1, &stmt, NULL);
-	if (result==SQLITE_OK){
-
-	}sqlite3_step(stmt);
-	sql="create table Reserva if not exists(int id Primary KEY;string nombre,string apellido,string email,string contraseña)";
-	result= sqlite3_prepare(bd, sql, strlen(sql)+1, &stmt, NULL);
-	if (result==SQLITE_OK){
-
-	}sqlite3_step(stmt);
-	sql="create table Instalacion if not exists(int id Primary KEY;string nombre,string deporte)";
-	result= sqlite3_prepare(bd, sql, strlen(sql)+1, &stmt, NULL);
-	if (result==SQLITE_OK){
-
-	}sqlite3_step(stmt);
-	sql="create table [if not exists] Polideportivo(int id Primary KEY;string nombre,string contraseña)";
-	result= sqlite3_prepare(bd, sql, strlen(sql)+1, &stmt, NULL);
-	if (result==SQLITE_OK){
-
-	}sqlite3_step(stmt);
-	result= sqlite3_finalize(stmt);
-	return result;
+	}return bd;
 }
-
-Polideportivo* cargarPolideportivo(char* nombre,sqlite3* bd){
+int cerrarBD(sqlite3* bd){
+	int result=sqlite3_close(bd);
+	if (result== SQLITE_OK){
+			printf("error al cerrar la base de datos");
+	}return result;
+}
+Polideportivo* cargarPolideportivo(int id,sqlite3* bd){
 	sqlite3_stmt* stmt;
 	Polideportivo* p= (Polideportivo*)malloc(sizeof(Polideportivo));
-	char* sql="Select * from Polideportivo where nombre='?'";
+	char* sql="Select * from Polideportivo where id=?";
 	int result = sqlite3_prepare(bd, sql, strlen(sql) + 1, &stmt, NULL) ;
-	sqlite3_bind_text(stmt, 1, nombre,strlen(nombre)+1,NULL);
+	sqlite3_bind_int(stmt, 1, id);
 	sqlite3_step(stmt);
 	if (result== SQLITE_ROW){
 		p->id=sqlite3_column_int(stmt, 0);
@@ -71,17 +49,26 @@ Polideportivo* cargarPolideportivo(char* nombre,sqlite3* bd){
 }
 
 
-int anadirPolideportivo(char* nombre,int id,Instalacion* insta,sqlite3* bd){
+int anadirPolideportivoaBD(char* nombre,int id,int NumInsta,char* Localidad,sqlite3* bd){
 	sqlite3_stmt* stmt;
 	char* sql="Insert into Polideportivos values(?,?,?,?)";
 	int result = sqlite3_prepare(bd, sql, strlen(sql) + 1, &stmt, NULL) ;
 	sqlite3_bind_int(stmt, 1, id);
 	sqlite3_bind_text(stmt, 2, nombre,strlen(nombre)+1,NULL);
-	sqlite3_step(stmt);
+	sqlite3_bind_int(stmt,4,NumInsta);
+	sqlite3_stmt*stmt2;
+	char* sql2="Select id_l from Localidad where nombre_l='?'";
+	int result2 = sqlite3_prepare(bd, sql, strlen(sql) + 1, &stmt, NULL) ;
+	sqlite3_step(stmt2);
+	if(result2==SQLITE_ROW){
+		sqlite3_bind_int(stmt,3,sqlite3_column_int(stmt2, 0));
+	}sqlite3_finalize(stmt2);
+	result=sqlite3_step(stmt);
+	result=sqlite3_finalize(stmt);
 	return result;
 }
 
-int anadirInstalacion(char* nombre,int id,char* deporte,Horario* h,int id_poli,sqlite3* bd){
+int anadirInstalacionaBD(char* nombre,int id,char* deporte,Horario* h,int id_poli,sqlite3* bd){
 	sqlite3_stmt* stmt;
 	char* sql="Insert into Instalacion values(?,?,?,?)";
 	int result = sqlite3_prepare(bd, sql, strlen(sql) + 1, &stmt, NULL);
@@ -211,6 +198,24 @@ int editarPolideportivo(Polideportivo* p,sqlite3* bd){
 				break;
 		}
 }
+int borrarPolideportivo(Polideportivo* p,sqlite3* bd){
+	sqlite3_stmt* stmt;
+	char* sql="Delete * from Polideportivo where id='?'";
+	int result = sqlite3_prepare(bd, sql, strlen(sql) + 1, &stmt, NULL) ;
+	sqlite3_bind_int(stmt, 1, p->id);
+	result= sqlite3_step(stmt);
+	sqlite3_finalize(stmt);
+	return result;
+}
+int borrarInstalacion(Instalacion* i,sqlite3* bd){
+	sqlite3_stmt* stmt;
+	char* sql="Delete * from Polideportivo where id='?'";
+	int result = sqlite3_prepare(bd, sql, strlen(sql) + 1, &stmt, NULL) ;
+	sqlite3_bind_int(stmt, 1, i->id);
+	result= sqlite3_step(stmt);
+	result=sqlite3_finalize(stmt);
+	return result;
+}
 Instalacion* cargarInstalacion(int id,sqlite3* bd){
 	sqlite3_stmt* stmt;
 		Instalacion* i= (Instalacion*)malloc(sizeof(Instalacion));
@@ -226,4 +231,4 @@ Instalacion* cargarInstalacion(int id,sqlite3* bd){
 		}
 		result= sqlite3_finalize(stmt);
 		return i;
-	}
+}
