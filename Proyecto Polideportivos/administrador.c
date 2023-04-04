@@ -18,7 +18,7 @@ void filtroAdmin(){
 	}
 }
 
-void filtoInstalaciones(Instalacion insta){
+void filtoInstalaciones(Instalacion *insta){
 	int opcion;
 	printf("Elige una de las opciones\n");
 	printf("1.Consultar Instalaciones \n");
@@ -49,14 +49,44 @@ void filtoPolideportivos(Polideportivo poli){
 	printf("5.Volver\n");
 	scanf("%d",opcion);
 	if(opcion ==1){
-			filtroInstalaciones();
+			filtroInstalaciones(poli.instalaciones);
 	}if(opcion == 2){
 			agregarPolideportivo();
 	}if(opcion == 3){
 			editarPolideportivo();
 	}if(opcion == 4){
-			borrarPolideportivo();
+			borrarPolideportivo(poli);
 	}if(opcion == 5){
 			filtroAdmin();
+	}
+}
+void borrarInstalacion(Instalacion *insta){
+	int opcion;
+	printf("¿Estas seguro que quieres borrar la Instalacion? \n");
+	printf("1.Si, estoy seguro\n");
+	printf("2.No, volver \n");
+	scanf("%d",opcion);
+	if(opcion == 1){
+		//Proceso de borrado
+		//añadir un filtro
+		printf("Intalacion borrada \n");
+		//añadir direccionamiento
+	}if(opcion == 2){
+		filtoInstalaciones(insta);
+	}
+}
+
+void borrarPolideportivo(Polideportivo poli){
+	int opcion;
+	printf("¿Estas seguro que quieres borrar el Polideportivo? \n");
+	printf("1.Si, estoy seguro\n");
+	printf("2.No, volver \n");
+	scanf("%d",opcion);
+	if(opcion == 1){
+		//Proceso de borrado
+		printf("Polideportivo borrado \n");
+		filtroAdmin();
+	}if(opcion == 2){
+		filtoPolideportivos(poli);
 	}
 }
