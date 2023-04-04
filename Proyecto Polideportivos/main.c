@@ -1,11 +1,15 @@
-/*
- * main.c
- *
- *  Created on: 23 mar 2023
- *      Author: pablo
- */
+#include <stdlib.h>
+#include <stdio.h>
+#include "proyecto.h"
 
+int main(void) {
+	int numero;// Numero de la primera pregunta
 
-int main(void){
+	printf("Bienvenido a la gestion de polideportivos\n");
+	printf("¿ Has iniciado sesion antes ?\n");
+	printf("1 = Si // 2 = No \n");
+	scanf("%d",&numero);
+	primeraVentana(numero);
+
 
 }
