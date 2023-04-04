@@ -17,10 +17,11 @@ typedef struct {
 	char* provincia;
 }Polideportivo;
 
+void agregarPoliderportivo();
 void verInstalaciones();
 void verNuMInsta();
 void imprimirPolideportivo();
 void verDir();
 void PolisDeCiudad();
 
-#endif /* POLIDEPORTIVO_H_ */
+#endif /* POLIDEPORTIVO_H_ */
