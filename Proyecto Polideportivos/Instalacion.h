@@ -8,6 +8,7 @@
 #ifndef INSTALACION_H_
 #define INSTALACION_H_
 #include <stdbool.h>
+#define MAX 15
 
 typedef struct{
 	bool ocupada;
@@ -15,14 +16,14 @@ typedef struct{
 }Hora;
 
 typedef struct{
-	Hora* horas;
+	Hora** horas;
 }Horario;
 
 typedef struct{
-	char* nombre;
+	char nombre[MAX];
 	int id;
 	Horario horario;
-	char* deporte;
+	char deporte[MAX];
 	int id_poli;
 }Instalacion;
 
