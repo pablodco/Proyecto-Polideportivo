@@ -26,10 +26,10 @@ typedef struct{
 	int id_poli;
 }Instalacion;
 
-
+void agregarInstalacion();
 int comprobarHora();
 void verHorario();
 void imprimirInstalacion();
 
 
-#endif /* INSTALACION_H_ */
+#endif /* INSTALACION_H_ */
