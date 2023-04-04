@@ -20,4 +20,10 @@ typedef struct{
 	int longitudApellido;
 }Administrador;
 
+void filtroAdmin();
+
+void filtoInstalaciones();
+
+void filtroPolideportivos();
+
 #endif /* ADMINISTRADOR_H_ */
