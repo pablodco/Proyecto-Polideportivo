@@ -5,42 +5,37 @@
 #define FALSE 0
 
 
-void agregarInstalacion(){
-	Instalacion miInstalacion;
-	printf("Introduzca el nombre de la instalación: ");
-	scanf("%s", miInstalacion.nombre);
-
-	printf("Introduzca el deporte: ");
-	scanf("%s", miInstalacion.deporte);
-
-	printf("Introduzca el id del polideportivo: ");
-	scanf("%d", &miInstalacion.id_poli);
-
+Instalacion* agregarInstalacion(){
+	char* aux=(char*) malloc(sizeof(char)*100);
+	Instalacion* miInstalacion= (Instalacion*)malloc(sizeof(Instalacion));
+	printf("Introduzca el nombre de la instalación:");
+	fflush(stdout);
+	scanf("%s", aux);
+	miInstalacion->nombre=(char*)malloc(sizeof(char)*(strlen(aux)+1));
+	strcpy(miInstalacion->nombre,aux);
+	printf("Introduzca el deporte:");
+	fflush(stdout);
+	scanf("%s", aux);
+	miInstalacion->deporte=(char*)malloc(sizeof(char)*(strlen(aux)+1));
+	strcpy(miInstalacion->deporte,aux);
+	printf("Introduzca el id del polideportivo:");
+	scanf("%d", &miInstalacion->id_poli);
 	// Pregunta al usuario por el horario
 	int numHoras;
-	printf("Introduzca el número de horas en el horario: ");
+	printf("Introduzca el número de horas en el horario:");
+	fflush(stdout);
 	scanf("%d", &numHoras);
+	for (int i=0;i<7;i++){
+	miInstalacion->horas[i]= (int*)malloc(sizeof(int)*numHoras);
+	}free(aux);
 
-	miInstalacion.horario.horas = (Hora*) malloc(numHoras * sizeof(Hora));
-
-	for (int i = 0; i < numHoras; i++) {
-	    printf("Introduzca la hora de inicio de la hora %d: ", i+1);
-	    scanf("%d", &miInstalacion.horario.horas[i]->hora);
-	    miInstalacion.horario.horas[i]->ocupada = FALSE;
-
-	    printf("Introduzca la hora de finalización de la hora %d: ", i+1);
-	    scanf("%d", &miInstalacion.horario.horas[i+1]->hora);
-	}
-	free(miInstalacion.horario.horas);
-
+	return miInstalacion;
 }
 
 void imprimirInstalacion(Instalacion i){
-	printf("ID de la instalación: %i", i.id);
-	fflush(stdout);
-	printf("Nombre de la instalación: %s", i.nombre);
-	fflush(stdout);
-	printf("Nombre del deporte: %s", i.deporte);
+	printf("ID de la instalación: %i\n", i.id);
+	printf("Nombre de la instalación: %s\n", i.nombre);
+	printf("Nombre del deporte: %s\n", i.deporte);
 	fflush(stdout);
 }
 
@@ -52,7 +47,7 @@ int comprobarHora(Instalacion i){
 	printf("Introduce la hora del día (0-23):\n");
 	fflush(stdout);
 	scanf("%d", &hora);
-	if (i.horario.horas[dia][hora] == 0) {
+	if (i.horas[dia][hora] == 0) {
 		printf("La hora está libre.\n");
 		return 0;
 	} else {

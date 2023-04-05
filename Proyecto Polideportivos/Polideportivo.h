@@ -9,14 +9,14 @@
 #define POLIDEPORTIVO_H_
 #include "instalacion.h"
 typedef struct {
-	char nombre[15];
+	char* nombre;
 	int id;
 	Instalacion* instalaciones;
 	int NumInsta;
-	char dir[15];
+	char* dir;
 }Polideportivo;
 
-void agregarPoliderportivo();
+Polideportivo* agregarPoliderportivo();
 void imprimirPolideportivo(Polideportivo p);
 void cambiarElemento(Polideportivo* p);
 void limpiarVariable(char *str, int max_line);
