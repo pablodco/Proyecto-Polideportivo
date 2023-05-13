@@ -19,6 +19,7 @@ Instalacion* agregarInstalacion(){
 	miInstalacion->deporte=(char*)malloc(sizeof(char)*(strlen(aux)+1));
 	strcpy(miInstalacion->deporte,aux);
 	printf("Introduzca el id del polideportivo:");
+	fflush(stdout);
 	scanf("%d", &miInstalacion->id_poli);
 	// Pregunta al usuario por el horario
 	int numHoras;

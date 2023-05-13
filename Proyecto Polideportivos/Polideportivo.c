@@ -19,7 +19,7 @@ void imprimirPolideportivo(Polideportivo p){
 	fflush(stdout);
 	int i;
 	for (i = 0; i < p.NumInsta; ++i) {
-		printf("   - Instalación %i: %s \n",i+1,p.instalaciones[i].nombre);
+		printf("   - Instalación %i: %s \n",i+1,p.instalaciones[i]->nombre);
 		fflush(stdout);
 	}
 	printf("------------------------------------");

@@ -11,7 +11,7 @@
 typedef struct {
 	char* nombre;
 	int id;
-	Instalacion* instalaciones;
+	Instalacion** instalaciones;
 	int NumInsta;
 	char* dir;
 }Polideportivo;
